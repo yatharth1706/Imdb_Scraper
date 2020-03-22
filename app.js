@@ -18,6 +18,12 @@ app.get('/search/:movie', (req,res) => {
     })
 })
 
+app.get('/movie/:imdbId', (req,res) => {
+    scraper.getMovie(req.params.imdbId).then( (movie) => {
+        res.json(movie);
+    })
+})
+
 app.listen(port, () => {
     console.log(`Listening on ${port}!!`)
 })
