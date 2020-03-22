@@ -39,8 +39,26 @@ function getMovie(imdbId){
     return fetch(`${movieurl}${imdbId}`).then( (response) => {
         return response.text();
     }).then( (data) => {
-        console.log(data);
-        return data;
+        const $ = cheerio.load(data);
+
+        const title = $('.title_wrapper h1').first().contents().filter(function() {
+            return this.type === 'text';
+        }).text().trim();
+        const rating = $('.subtext').contents().filter(function(){ 
+            return this.nodeType == 3; 
+          }).text().trim().split(',')[0].trim()
+        
+        const timing = $('time').contents().filter(function(){
+            return this.nodeType == 3;
+        }).text().trim().split(' ')[0] + ' ' + $('time').contents().filter(function(){
+            return this.nodeType == 3;
+        }).text().trim().split(' ')[1];
+        
+        return {
+            title,
+            rating,
+            timing: timing.trim()
+        }
     })
 }
 
