@@ -54,10 +54,26 @@ function getMovie(imdbId){
             return this.nodeType == 3;
         }).text().trim().split(' ')[1];
         
+
+        const generes1 = $('.subtext').text().trim().split('|')[2].trim().split(',');
+
+        const generes = generes1.map((el) => {
+            return el.trim();
+        })
+        
+
+        const imdbRating = $('span[itemprop="ratingValue"]').text();
+        const poster = $('.poster a img').attr('src');
+        const summary = $('.summary_text').text().trim();
+
         return {
             title,
             rating,
-            timing: timing.trim()
+            timing: timing.trim(),
+            generes,
+            imdbRating,
+            poster,
+            summary
         }
     })
 }
