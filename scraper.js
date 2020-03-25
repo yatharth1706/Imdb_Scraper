@@ -65,6 +65,17 @@ function getMovie(imdbId){
         const imdbRating = $('span[itemprop="ratingValue"]').text();
         const poster = $('.poster a img').attr('src');
         const summary = $('.summary_text').text().trim();
+        const directors1 = $('.credit_summary_item').eq(0).text().trim().split(/\n/)[1].split(',');
+
+        const directors = directors1.map((el) => {
+            return el.trim();
+        })
+
+        const writers1 = $('.credit_summary_item').eq(1).text().trim().split(/\n/)[1].split(',')
+
+        const writers = writers1.map((el) => {
+            return el.trim().split('|')[0];
+        })
 
         return {
             title,
@@ -73,7 +84,9 @@ function getMovie(imdbId){
             generes,
             imdbRating,
             poster,
-            summary
+            summary,
+            directors,
+            writers
         }
     })
 }
