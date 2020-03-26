@@ -56,22 +56,36 @@ function getMovie(imdbId){
         
 
         const generes1 = $('.subtext').text().trim().split('|')[2].trim().split(',');
+        
 
         const generes = generes1.map((el) => {
             return el.trim();
         })
-        
 
         const imdbRating = $('span[itemprop="ratingValue"]').text();
         const poster = $('.poster a img').attr('src');
         const summary = $('.summary_text').text().trim();
-        const directors1 = $('.credit_summary_item').eq(0).text().trim().split(/\n/)[1].split(',');
+        
+        var directors1;
+        if($('.credit_summary_item').eq(0).text()){
+            directors1 = $('.credit_summary_item').eq(0).text().trim().split(/\n/)[1].split(',');    
+        }else{
+            directors1 = [];
+        }
+        
 
         const directors = directors1.map((el) => {
             return el.trim();
         })
 
-        const writers1 = $('.credit_summary_item').eq(1).text().trim().split(/\n/)[1].split(',')
+
+        var writers1;
+        if($('.credit_summary_item').eq(1).text()){
+            writers1 = $('.credit_summary_item').eq(1).text().trim().split(/\n/)[1].split(',')
+        }
+        else{
+            writers1 = [];
+        }
 
         const writers = writers1.map((el) => {
             return el.trim().split('|')[0];
