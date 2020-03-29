@@ -9,3 +9,4 @@
 * [ ] Create Front End User Interface 
 * [ ] Improving frontend
 * [ ] Deploy on Firebase or other hosting sites 
+* [ ] Add Caching 
