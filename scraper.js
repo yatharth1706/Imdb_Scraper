@@ -91,6 +91,26 @@ function getMovie(imdbId){
             return el.trim().split('|')[0];
         })
 
+        // extracting trailer link
+        const trailerLink = $('.slate a').attr('href');
+        const trailer = `https://www.imdb.com${trailerLink}`; 
+
+        // extracting storyline
+
+        const storyline = $('.canwrap').eq(0).find('span').text().trim();
+
+        // extracting image gallery
+
+        const imagesObject = $('.mediastrip a');
+
+        const images = [];
+
+        imagesObject.each((index,el)=>{
+            
+            const source = $(el).attr('href');
+            images.push(`https://www.imdb.com${source}`);
+        })
+
         return {
             title,
             rating,
@@ -100,7 +120,10 @@ function getMovie(imdbId){
             poster,
             summary,
             directors,
-            writers
+            writers,
+            trailer,
+            storyline,
+            images
         }
     })
 }
